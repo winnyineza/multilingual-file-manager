@@ -1,0 +1,25 @@
+{
+  "name": "multilingual-file-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bull": "^4.16.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "i18next": "^23.16.6",
+    "i18next-express-middleware": "^2.0.0",
+    "jest": "^29.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.4",
+    "redis": "^4.7.0",
+    "supertest": "^7.0.0"
+  }
+}
