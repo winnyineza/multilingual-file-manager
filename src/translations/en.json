@@ -1,0 +1,13 @@
+{
+  "welcome": "Welcome to the Multilingual File Manager",
+  "file_created": "File created successfully.",
+  "file_deleted": "File deleted successfully.",
+  "file_updated": "File updated successfully.",
+  "user_registered": "User registered successfully.",
+  "user_login_success": "Login successful.",
+  "user_login_failure": "Invalid credentials.",
+  "file_not_found": "File not found.",
+  "error_occurred": "An error occurred. Please try again.",
+  "logout": "Logout",
+  "language_selection": "Select your preferred language"
+}

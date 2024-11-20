@@ -1,0 +1,13 @@
+{
+  "welcome": "Bienvenido al Gestor de Archivos Multilingüe",
+  "file_created": "Archivo creado con éxito.",
+  "file_deleted": "Archivo eliminado con éxito.",
+  "file_updated": "Archivo actualizado con éxito.",
+  "user_registered": "Usuario registrado con éxito.",
+  "user_login_success": "Inicio de sesión exitoso.",
+  "user_login_failure": "Credenciales inválidas.",
+  "file_not_found": "Archivo no encontrado.",
+  "error_occurred": "Ocurrió un error. Por favor, inténtelo de nuevo.",
+  "logout": "Cerrar sesión",
+  "language_selection": "Seleccione su idioma preferido"
+}
