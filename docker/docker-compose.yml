@@ -1,36 +1,17 @@
 version: '3.8'
 
 services:
-  backend:
-    build:
-      context: ../backend
-      dockerfile: ../docker/Dockerfile.backend
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - DB_HOST=db
-      - REDIS_URL=redis://redis:6379
-    depends_on:
-      - db
-      - redis
-
-  frontend:
-    build:
-      context: ../frontend
-      dockerfile: ../docker/Dockerfile.frontend
-    ports:
-      - "3001:3000"
-    environment:
-      - REACT_APP_API_URL=http://localhost:3000/api
-
   db:
-    image: mysql:8
+    image: mysql:8.0
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: your_password
+      MYSQL_DATABASE: file_manager
+      MYSQL_TEST_DATABASE: file_manager_test
+    ports:
+      - "3306:3306"
     volumes:
-      - db_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
 
   redis:
     image: redis:alpine
@@ -38,4 +19,4 @@ services:
       - "6379:6379"
 
 volumes:
-  db_data: 
+  mysql_data:

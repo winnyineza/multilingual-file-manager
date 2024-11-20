@@ -1,35 +1,26 @@
 # API Specification
 
-## Authentication
-### POST /api/users/register
+## Authentication Endpoints
+
+### POST /api/auth/register
 Register a new user
-- Body: `{ username, email, password }`
-- Response: `{ message, userId }`
+- Body: { username, email, password }
+- Response: { userId, message }
 
-### POST /api/users/login
+### POST /api/auth/login
 Login user
-- Body: `{ email, password }`
-- Response: `{ token, user }`
+- Body: { email, password }
+- Response: { token }
 
-## Files
+## File Endpoints
+
+### GET /api/files
+Get user's files
+- Headers: Authorization: Bearer {token}
+- Response: Array of files
+
 ### POST /api/files
-Create new file
-- Headers: `Authorization: Bearer <token>`
-- Body: `{ name, path, user_id }`
-- Response: `{ message, id }`
-
-### GET /api/files/:id
-Get file by ID
-- Headers: `Authorization: Bearer <token>`
-- Response: `{ id, name, path, user_id }`
-
-### PUT /api/files/:id
-Update file
-- Headers: `Authorization: Bearer <token>`
-- Body: `{ name, path }`
-- Response: `{ message }`
-
-### DELETE /api/files/:id
-Delete file
-- Headers: `Authorization: Bearer <token>`
-- Response: `{ message }` 
+Upload new file
+- Headers: Authorization: Bearer {token}
+- Body: FormData with file
+- Response: { message, fileId } 

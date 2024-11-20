@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "npm run migrate:test && vitest",
+    "test:unit": "vitest src/tests/unit",
+    "test:integration": "vitest src/tests/integration",
+    "test:e2e": "vitest src/tests/e2e",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch"
+  }
+} 
