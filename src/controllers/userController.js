@@ -1,30 +1,35 @@
-const User = require('../models/userModel');
-const jwt = require('jsonwebtoken');
+const UserService = require('../services/userService');
+const AppError = require('../utils/AppError');
 
 const userController = {
-  register: async (req, res) => {
+  register: async (req, res, next) => {
     try {
-      const { username, password } = req.body;
-      console.log(req.body);
-      await User.register(username, password);
-      res.status(201).json({ message: 'User registered successfully.' });
+      const user = await UserService.createUser(req.body);
+      res.status(201).json({
+        message: req.t('user_created'),
+        userId: user.id
+      });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   },
-  login: async (req, res) => {
+
+  login: async (req, res, next) => {
     try {
-      const { username, password } = req.body;
-      const user = await User.findByUsername(username);
-      if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: 'Invalid credentials.' });
-      }
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
+      const { token, user } = await UserService.loginUser(req.body);
+      res.json({
+        message: req.t('login_success'),
+        token,
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email
+        }
+      });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
-  },
+  }
 };
 
 module.exports = userController;

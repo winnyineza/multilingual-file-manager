@@ -1,0 +1,18 @@
+{
+  "login": "Iniciar sesión",
+  "logout": "Cerrar sesión",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "username": "Nombre de usuario",
+  "profile": "Perfil",
+  "dashboard": "Panel de control",
+  "upload": "Subir",
+  "drag_drop_files": "Arrastra y suelta archivos aquí",
+  "drop_files": "Suelta los archivos aquí",
+  "select_files": "Seleccionar archivos",
+  "file_uploaded": "Archivo subido exitosamente",
+  "upload_failed": "Error al subir el archivo",
+  "delete_failed": "Error al eliminar el archivo",
+  "fetch_files_failed": "Error al obtener los archivos",
+  "file_deleted": "Archivo eliminado exitosamente"
+} 

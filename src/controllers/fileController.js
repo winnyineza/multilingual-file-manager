@@ -1,26 +1,28 @@
-const File = require('../models/fileModel');
+const FileService = require('../services/fileService');
 
 const fileController = {
-  create: async (req, res) => {
+  create: async (req, res, next) => {
     try {
-      const fileData = req.body;
-      const result = await File.create(fileData);
-      res.status(201).json({ message: 'File created successfully.', id: result.insertId });
+      const result = await FileService.createFile(req.body);
+      res.status(201).json({ 
+        message: req.t('file_created'),
+        id: result.insertId 
+      });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   },
-  getById: async (req, res) => {
+  getById: async (req, res, next) => {
     try {
-      const file = await File.findById(req.params.id);
+      const file = await FileService.getFile(req.params.id);
       res.json(file);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   },
   update: async (req, res) => {
     try {
-      await File.update(req.params.id, req.body);
+      await FileService.updateFile(req.params.id, req.body);
       res.json({ message: 'File updated successfully.' });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -28,7 +30,7 @@ const fileController = {
   },
   delete: async (req, res) => {
     try {
-      await File.delete(req.params.id);
+      await FileService.deleteFile(req.params.id);
       res.json({ message: 'File deleted successfully.' });
     } catch (error) {
       res.status(500).json({ error: error.message });

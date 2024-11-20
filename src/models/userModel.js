@@ -1,24 +1,20 @@
 const db = require('../config/db');
-const bcrypt = require('bcryptjs');
 
 const User = {
-  register: async (username, password) => {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    return new Promise((resolve, reject) => {
-      db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err, results) => {
-        if (err) return reject(err);
-        resolve(results);
-      });
-    });
+  create: async (userData) => {
+    const [result] = await db.query('INSERT INTO users SET ?', userData);
+    return { id: result.insertId, ...userData };
   },
-  findByUsername: (username) => {
-    return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
-        if (err) return reject(err);
-        resolve(results[0]);
-      });
-    });
+
+  findByEmail: async (email) => {
+    const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+    return rows[0];
   },
+
+  findById: async (id) => {
+    const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [id]);
+    return rows[0];
+  }
 };
 
 module.exports = User;

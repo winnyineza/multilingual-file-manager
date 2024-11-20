@@ -1,38 +1,43 @@
 const db = require('../config/db');
+const withTransaction = require('../utils/transaction');
 
 const File = {
   create: async (fileData) => {
-    return new Promise((resolve, reject) => {
-      db.query('INSERT INTO files SET ?', fileData, (err, results) => {
-        if (err) return reject(err);
-        resolve(results);
-      });
+    return withTransaction(async (connection) => {
+      const [result] = await connection.query(
+        'INSERT INTO files SET ?',
+        fileData
+      );
+      return { id: result.insertId, ...fileData };
     });
   },
-  findById: (id) => {
-    return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM files WHERE id = ?', [id], (err, results) => {
-        if (err) return reject(err);
-        resolve(results[0]);
-      });
-    });
+
+  findById: async (id) => {
+    const [rows] = await db.query(
+      'SELECT * FROM files WHERE id = ?',
+      [id]
+    );
+    return rows[0];
   },
+
   update: async (id, fileData) => {
-    return new Promise((resolve, reject) => {
-      db.query('UPDATE files SET ? WHERE id = ?', [fileData, id], (err, results) => {
-        if (err) return reject(err);
-        resolve(results);
-      });
+    return withTransaction(async (connection) => {
+      await connection.query(
+        'UPDATE files SET ? WHERE id = ?',
+        [fileData, id]
+      );
+      return { id, ...fileData };
     });
   },
+
   delete: async (id) => {
-    return new Promise((resolve, reject) => {
-      db.query('DELETE FROM files WHERE id = ?', [id], (err, results) => {
-        if (err) return reject(err);
-        resolve(results);
-      });
+    return withTransaction(async (connection) => {
+      await connection.query(
+        'DELETE FROM files WHERE id = ?',
+        [id]
+      );
     });
-  },
+  }
 };
 
 module.exports = File;

@@ -1,0 +1,15 @@
+{
+  "login": "Login",
+  "logout": "Logout",
+  "email": "Email",
+  "password": "Password",
+  "username": "Username",
+  "profile": "Profile",
+  "dashboard": "Dashboard",
+  "upload": "Upload",
+  "drag_drop_files": "Drag and drop files here",
+  "drop_files": "Drop files here",
+  "select_files": "Select Files",
+  "file_uploaded": "File uploaded successfully",
+  "upload_failed": "Upload failed"
+} 

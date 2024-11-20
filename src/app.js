@@ -1,22 +1,34 @@
 const express = require('express');
-const userRoutes = require('./routes/userRoutes');
 const i18nextMiddleware = require('i18next-express-middleware');
-const i18next = require('i18next');
-const dotenv = require('dotenv');
-
-dotenv.config();
-
-i18next.use(i18nextMiddleware.LanguageDetector).init({
-  fallbackLng: 'en',
-  resources: {
-    en: { translation: require('./translations/en.json') },
-    es: { translation: require('./translations/es.json') },
-  },
-});
+const i18nConfig = require('./config/i18n');
+const routes = require('./routes');
+const errorHandler = require('./middlewares/errorHandler');
+const logger = require('./utils/logger');
 
 const app = express();
+
+// Middleware
 app.use(express.json());
-app.use(i18nextMiddleware.handle(i18next));
-app.use('/api/users', userRoutes);
+app.use(express.urlencoded({ extended: true }));
+
+// Logging middleware
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  next();
+});
+
+// i18n middleware
+app.use(i18nextMiddleware.handle(i18nConfig));
+
+// Routes
+app.use('/api', routes);
+
+// Error handling
+app.use(errorHandler);
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ message: req.t('not_found') });
+});
 
 module.exports = app;
