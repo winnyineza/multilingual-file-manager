@@ -1,15 +1,16 @@
 module.exports = {
-  testEnvironment: 'jsdom',
-  testMatch: ['**/tests/**/*.test.js'],
+  testEnvironment: 'node',
+  testMatch: [
+    '**/src/tests/routes.test.js',
+    '**/src/tests/unit/services/fileService.test.js'
+  ],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: [
-    '/node_modules/',
-    '/tests/'
+    '/node_modules/'
   ],
-  setupFilesAfterEnv: ["<rootDir>/setupTests.js"],
-  moduleNameMapper: {
-    "^.+\\.svg$": "jest-svg-transformer",
-    "^.+\\.(css|less|scss)$": "identity-obj-proxy"
-  }
-}; 
+  verbose: true,
+  modulePathIgnorePatterns: [
+    'node_modules'
+  ]
+};

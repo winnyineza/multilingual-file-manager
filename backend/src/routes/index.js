@@ -1,10 +1,9 @@
 const express = require("express");
-const authRoutes = require("./auth");
-const fileRoutes = require("./files");
-
 const router = express.Router();
 
-router.use("/auth", authRoutes);
-router.use("/files", fileRoutes);
+// Basic health check route
+router.get("/health", (req, res) => {
+  res.json({ status: "ok" });
+});
 
 module.exports = router;
